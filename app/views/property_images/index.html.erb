@@ -15,3 +15,75 @@
 <%= render 'form' %>
 
 <%= link_to 'Back', property_images_path %>
+
+<div id="container">
+	<header>
+		<h1>Image Slider</h1>
+	</header>
+
+	<%= image_tag 'arrow-left.png', alt: 'prev', id: 'prev' %>
+	
+	<div id="slider">
+		<% @property_images.each_with_index do |image, idx| %>
+			<div class="slide">
+				<div class="slide-copy">
+					<!-- 
+					<h2> <%= image.name %> </h2>
+					<p> <%= image.name %></p> 
+					-->
+					<h2> Image Title <%= idx %></h2>
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus pharetra dui ut orci dapibus, eget tempor enim tempor. Praesent dolor ex, accumsan eget mi ut, luctus euismod erat. Interdum et malesuada fames ac ante ipsum primis in faucibus. Interdum et malesuada fames ac ante ipsum primis in faucibus.
+					</p>
+				</div>
+				<%= image_tag image.image_url %>
+			</div>
+		<% end %>
+	</div>
+
+	<%= image_tag 'arrow-right.png', alt: 'next', id: 'next' %>
+</div>
+<script>
+
+	function cycle(direction) {
+		if(typeof(direction) == undefined) direction = 'forward';
+		
+		// defind a closure as a call back for the forward/backward sliding
+		return function() {
+			var activeSlide = $('div.slide.active')
+			
+			// set next active slide
+			var nextActive;
+			if('forward' == direction) {
+				nextActive = activeSlide.next();
+				if(activeSlide.is(':last-child')) {
+					nextActive = $('div.slide').first();
+				}
+			} else {
+				nextActive = activeSlide.prev();
+				if(activeSlide.is(':first-child')) {
+					nextActive = $('div.slide').last();
+				}
+			}
+
+			// set the class of active slide to .active
+			activeSlide.removeClass('active');
+			nextActive.addClass('active');
+
+			// add behavior to the active and inactive element
+			activeSlide.fadeOut(500);
+			nextActive.fadeIn(500);
+		};
+	}
+
+	$(document).ready(function(){
+		$('div.slide').first().addClass('active');
+		$('div.slide').hide();
+		$('div.slide.active').show();
+		
+		$('#next').on('click', cycle());
+
+		$('#prev').on('click', cycle('backward'));
+		setInterval(cycle('forward'), 3000);
+	});
+</script>
