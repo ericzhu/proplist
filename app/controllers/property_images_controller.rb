@@ -1,9 +1,11 @@
 class PropertyImagesController < ApplicationController
+  
   before_action :set_property_image, only: [:show, :edit, :update, :destroy]
 
   # GET /property_images
   # GET /property_images.json
   def index
+    @property_image = PropertyImage.new
     @property_images = PropertyImage.all
   end
 
@@ -24,17 +26,20 @@ class PropertyImagesController < ApplicationController
   # POST /property_images
   # POST /property_images.json
   def create
-    @property_image = PropertyImage.new(property_image_params)
+    # @property_image = PropertyImage.new(property_image_params)
 
-    respond_to do |format|
-      if @property_image.save
-        format.html { redirect_to @property_image, notice: 'Property image was successfully created.' }
-        format.json { render :show, status: :created, location: @property_image }
-      else
-        format.html { render :new }
-        format.json { render json: @property_image.errors, status: :unprocessable_entity }
-      end
-    end
+    # respond_to do |format|
+    #   if @property_image.save
+    #     format.html { redirect_to @property_image, notice: 'Property image was successfully created.' }
+    #     format.json { render :show, status: :created, location: @property_image }
+    #   else
+    #     format.html { render :new }
+    #     format.json { render json: @property_image.errors, status: :unprocessable_entity }
+    #   end
+    # end
+
+    @property_image = PropertyImage.create(property_image_params)
+
   end
 
   # PATCH/PUT /property_images/1

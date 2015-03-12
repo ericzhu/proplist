@@ -7,7 +7,7 @@
 
 <p>
   <strong>Image:</strong>
-  <%= @property_image.image %>
+  <%= image_tag @property_image.image_url %>
 </p>
 
 <%= link_to 'Edit', edit_property_image_path(@property_image) %> |

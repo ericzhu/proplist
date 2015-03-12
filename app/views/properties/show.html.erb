@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+<h1>Property ref: <%= @property.ref %></h1>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Image</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @property.images.each do |image| %>
+      <tr>
+        <td><%= image.name %></td>
+        <td>
+          <%= image_tag image.image_url(:thumb).to_s %>
+        </td>
+        <td><%= link_to 'Show', image %></td>
+        <td><%= link_to 'Edit', edit_property_image_path(image) %></td>
+        <td><%= link_to 'Destroy', image, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

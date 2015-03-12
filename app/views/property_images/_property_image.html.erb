@@ -1,0 +1,8 @@
+<div class="col-xs-6 col-sm-4 col-md-3">
+  <%= link_to image_tag(property_image.image_url(:thumb)), property_image if property_image.image? %>
+  <div class="name"><%= property_image.name %></div>
+  <div class="actions">
+    <%= link_to "edit", edit_property_image_path(property_image) %> |
+    <%= link_to "remove", property_image, :confirm => 'Are you sure?', :method => :delete %>
+  </div>
+</div>
